@@ -8,11 +8,11 @@
 
 ## 実行手順
 ---------------------------------------------------------------------
-$ git clone git@github.com:EDLGLD/DEV_RULE_MASTER.git
-$ cd DEV_RULE_MASTER
-$ bundle install
-$ rails db:create && rails db:migrate
-$ rails s
+git clone git@github.com:EDLGLD/DEV_RULE_MASTER.git  
+cd DEV_RULE_MASTER  
+bundle install  
+rails db:create && rails db:migrate  
+rails s  
 
 ## カタログ設計
 ---------------------------------------------------------------------
