@@ -28,8 +28,7 @@ rails s
 
 ## ER図
 ---------------------------------------------------------------------
-![image](https://github.com/user-attachments/assets/24e6b1f9-2c68-4554-a0f4-be7449dd439c)
-
+![image](https://github.com/user-attachments/assets/9da5130e-ba49-4b65-b05e-a781816c7705)
 
 ## 画面遷移図
 ---------------------------------------------------------------------
