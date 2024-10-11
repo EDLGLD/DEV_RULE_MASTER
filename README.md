@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # DEV_RULE_MASTER
 # README
 
@@ -34,3 +35,29 @@ rails s
 ---------------------------------------------------------------------
 ![image](https://github.com/user-attachments/assets/749a2885-c8d8-48fa-b26a-20a8ea5d97f0)
 
+=======
+# README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
+>>>>>>> プロジェクト開始
