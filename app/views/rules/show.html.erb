@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @rule.title %>
+</p>
+
+<p>
+  <strong>Team name:</strong>
+  <%= @rule.team_name_id %>
+</p>
+
+<p>
+  <strong>Details:</strong>
+  <%= @rule.details %>
+</p>
+
+<p>
+  <strong>Background:</strong>
+  <%= @rule.background %>
+</p>
+
+<p>
+  <strong>Ended at:</strong>
+  <%= @rule.ended_at %>
+</p>
+
+<%= link_to 'Edit', edit_rule_path(@rule) %> |
+<%= link_to 'Back', rules_path %>
