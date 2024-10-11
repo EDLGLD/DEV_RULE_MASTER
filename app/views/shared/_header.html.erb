@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container d-flex justify-content-between align-items-center">
+    <%= link_to "RULE_MASTER", "/", class: "navbar-brand" %>
+
+    <div class="d-flex">
+      <ul class="navbar-nav">
+        <% if current_user %>
+          <!-- チームごとのリンクを動的に表示 -->
+          <% current_user.team_names.each do |team_name| %>
+            <li class="nav-item">
+              <%= link_to team_name.name, rules_path(team_name_id: team_name.id), class: "nav-link" %>
+            </li>
+          <% end %>
+
+          <!-- ユーザー名ドロップダウンメニュー -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= current_user.username %>さん
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <% if current_user.admin? %>
+                <li>
+                  <%= link_to "Admin画面", rails_admin_path, class: "dropdown-item" %>
+                </li>
+              <% end %>
+              <% if current_user.leader? || current_user.admin? %>
+                <li>
+                  <%= link_to "修正リクエスト一覧", rule_requests_path, class: "dropdown-item" %>
+                </li>
+                <li>
+                  <%= link_to "新規ルール作成", new_rule_path, class: "dropdown-item" %> <!-- 新規ルール作成へのリンクを追加 -->
+                </li>
+              <% end %>
+              <li>
+                <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+              </li>
+            </ul>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "ユーザー登録", new_user_registration_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

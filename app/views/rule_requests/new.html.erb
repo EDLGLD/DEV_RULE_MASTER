@@ -1,0 +1,17 @@
+<h2>修正リクエスト作成</h2>
+
+<%= form_with(model: @rule_request) do |f| %>
+  <div class="field">
+    <%= f.label :rule_id, "関連するルール" %>
+    <%= f.collection_select :rule_id, @rules, :id, :title, { prompt: "ルールを選択" }, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :request_details, "修正内容" %>
+    <%= f.text_area :request_details, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "リクエストを送信", class: "btn btn-primary" %>
+  </div>
+<% end %>

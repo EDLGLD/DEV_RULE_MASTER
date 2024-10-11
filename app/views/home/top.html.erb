@@ -1,0 +1,35 @@
+<h1>Home#top</h1>
+<p>Find me in app/views/home/top.html.erb</p>
+
+<% if current_user.admin? || current_user.leader? %>
+  <!-- 管理者またはリーダーとしてログインしている場合 -->
+  <h2>お知らせ</h2>
+  <% if @pending_rule_requests.any? %>
+    <p>未処理のルール修正リクエストがあります。</p>
+    <ul>
+      <% @pending_rule_requests.each do |request| %>
+        <li>
+          <%= link_to request.rule.title, rule_path(request.rule) %>（申請者: <%= request.user.username %>）
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>現在、未処理のルール修正リクエストはありません。</p>
+  <% end %>
+  
+<% elsif current_user.general? %>
+  <!-- 一般ユーザーとしてログインしている場合 -->
+  <h2>お知らせ</h2>
+  <h3>送信したルール修正リクエストのステータス</h3>
+  <% if @user_rule_requests.any? %>
+    <ul>
+      <% @user_rule_requests.each do |request| %>
+        <li>
+          <%= request.rule.title %>：<%= request.status.humanize %> <!-- ステータス表示 -->
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>送信した修正リクエストはありません。</p>
+  <% end %>
+<% end %>
