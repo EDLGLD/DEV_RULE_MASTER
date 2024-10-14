@@ -1,0 +1,44 @@
+<h2>修正リクエスト一覧</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ルール名</th>
+      <th>リクエスト内容</th>
+      <th>申請者</th>
+      <th>ステータス</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @rule_requests.each do |request| %>
+      <tr>
+        <td><%= request.rule.title if request.rule %></td>
+        <td><%= request.request_details %></td>
+        <td><%= request.user.username if request.user %></td>
+        <td><%= request.status.humanize %></td> <!-- ステータスを人間に読みやすい形式に -->
+        <td>
+            <% if request.status == 'pending' %> <!-- ステータスが 'pending' の場合のみ表示 -->
+
+              <!-- 承認用のフォーム -->
+              <%= form_with(url: rule_request_path(request), method: :patch, local: true) do %>
+                <%= hidden_field_tag :status, 'approved' %>
+                <%= submit_tag '承認', class: "btn btn-success" %>
+              <% end %>
+
+              <!-- 却下用のフォーム -->
+              <%= form_with(url: rule_request_path(request), method: :patch, local: true) do %>
+                <%= hidden_field_tag :status, 'rejected' %>
+                <%= submit_tag '却下', class: "btn btn-danger" %>
+              <% end %>
+
+            <% else %>
+            <span class="text-muted">処理済み</span> <!-- 既に処理されたリクエストの場合 -->
+            <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "戻る", root_path, class: "btn btn-secondary" %>

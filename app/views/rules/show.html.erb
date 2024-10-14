@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @rule.title %></h1>
+
+<p>
+  <strong>Details:</strong>
+  <%= @rule.details %>
+</p>
+<p>
+  <strong>Background:</strong>
+  <%= @rule.background %>
+</p>
+<p>
+  <strong>Created at:</strong>
+  <%= @rule.created_at %>
+</p>
+<p>
+  <strong>Ended at:</strong>
+  <%= @rule.ended_at %>
+</p>
+
+<% if current_user.admin? || current_user.leader? %>
+  <%= link_to 'Delete', @rule, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% else %>
+  <%= link_to '修正リクエスト', new_rule_request_path, class: 'btn btn-warning' %>
+<% end %>
+
+<%= link_to 'Back', rules_path(team_name_id: @rule.team_name_id) %> <!-- チームIDを指定して戻る -->
