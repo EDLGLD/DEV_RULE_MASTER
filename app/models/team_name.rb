@@ -1,5 +1,5 @@
 class TeamName < ApplicationRecord
-  has_and_belongs_to_many :users
-  has_many :rules
+  has_many :team_names_users
+  has_many :users, through: :team_names_users
   validates :name, presence: true, uniqueness: true
 end

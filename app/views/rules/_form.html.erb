@@ -2,7 +2,6 @@
   <% if rule.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(rule.errors.count, "error") %> prohibited this rule from being saved:</h2>
-
       <ul>
         <% rule.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,32 +10,43 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :team_name_id %>
-    <%= form.text_field :team_name_id %>
+  <div class="field" style="display: flex; align-items: center;">
+    <div style="margin-right: 10px;">
+      <%= form.label :title %>
+      <%= form.text_field :title, size: 30 %> <!-- サイズを大きく設定 -->
+    </div>
+    <div>
+      <%= form.label :team_name_id, "チーム名" %>
+      <%= form.collection_select :team_name_id, TeamName.all, :id, :name, prompt: "選択してください", class: 'form-control' %>
+    </div>
   </div>
 
   <div class="field">
     <%= form.label :details %>
-    <%= form.text_area :details %>
+    <%= form.text_area :details, size: "40x10" %> <!-- サイズを大きく設定 -->
   </div>
 
   <div class="field">
     <%= form.label :background %>
-    <%= form.text_area :background %>
+    <%= form.text_area :background, size: "40x8" %> <!-- サイズを背景の方が少し小さく設定 -->
   </div>
 
   <div class="field">
+    <%= form.label :started_at %>
+    <%= form.datetime_select :started_at, class: 'form-control' %> <!-- クラスを追加してBootstrapスタイルを適用 -->
+  </div>
+  
+  <div class="field">
     <%= form.label :ended_at %>
-    <%= form.datetime_select :ended_at %>
+    <%= form.datetime_select :ended_at, class: 'form-control' %> <!-- クラスを追加してBootstrapスタイルを適用 -->
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+  <% if rule.new_record? %>
+    <%= form.submit t('actions.create'), class: "btn btn-primary" %> <!-- 新規作成の場合 -->
+  <% else %>
+    <%= form.submit t('actions.save'), class: "btn btn-primary" %> <!-- 編集の場合 -->
+  <% end %>
+  <%= link_to t('actions.back'), rules_path(team_name_id: @rule.team_name_id), class: "btn btn-light" %> <!-- 白いボタン -->
   </div>
 <% end %>

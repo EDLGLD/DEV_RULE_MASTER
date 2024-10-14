@@ -7,10 +7,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username, team_name_ids: []])
   end
 
-  def create
-    super do |resource|
-      resource.role = :general # デフォルトの役割を設定
-      resource.save if resource.valid? # ユーザーが有効な場合に保存
-    end
+  def after_sign_up_path_for(resource)
+    resource.update(role: :general) # デフォルトの役割を設定
+    super(resource)
   end
 end
