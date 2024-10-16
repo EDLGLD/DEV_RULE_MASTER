@@ -1,2 +1,2 @@
-@import "../node_modules/bootstrap/scss/bootstrap"; // Bootstrapを先にインポート
+@import "~bootstrap/scss/bootstrap";
 @import "rails_admin/src/rails_admin/styles/base"; // その後にRailsAdminのスタイルをインポート
