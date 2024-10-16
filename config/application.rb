@@ -18,6 +18,5 @@ module DEVRuleMaster
         helper_specs: false, # ヘルパーファイル用のスペックを作成しない
         routing_specs: false # routes.rb用のスペックファイル作成しない
     end
-    config.assets.compile = false
   end
 end
