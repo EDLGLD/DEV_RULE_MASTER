@@ -395,6 +395,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   sass-rails (>= 6)
+  sassc-rails
   selenium-webdriver
   spring
   spring-commands-rspec
