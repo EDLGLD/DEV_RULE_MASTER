@@ -16,6 +16,9 @@
     "webpack-cli": "^3.3.12"
   },
   "version": "0.1.0",
+  "engines": {
+    "node": "v18.20.3"
+  },
   "devDependencies": {
     "webpack-dev-server": "^3"
   },
