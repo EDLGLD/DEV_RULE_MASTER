@@ -39,7 +39,7 @@ Rule.find_or_create_by!(
 # 管理者ユーザー (全てのチームに所属)
 nakamura = User.find_or_create_by!(
   email: 'nakamura@example.com',
-  username: '中村',
+  username: '中村 竹郎',
   role: :admin
 ) do |user|
   user.password = '111111'
@@ -50,7 +50,7 @@ nakamura.team_names = [team_general, team_alpha, team_beta]
 # 一般ユーザー (Team Alpha に所属)
 omura = User.find_or_create_by!(
   email: 'omura@example.com',
-  username: '大村',
+  username: '大村 梅郎',
   role: :general
 ) do |user|
   user.password = '111111'
@@ -61,7 +61,7 @@ omura.team_names << team_alpha
 # 一般ユーザー (Team Beta に所属)
 kimura = User.find_or_create_by!(
   email: 'kimura@example.com',
-  username: '木村',
+  username: '木村 松郎',
   role: :general
 ) do |user|
   user.password = '111111'
