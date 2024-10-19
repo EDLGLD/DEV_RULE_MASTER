@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 2024_10_11_154135) do
   create_table "rule_requests", force: :cascade do |t|
     t.bigint "rule_id", null: false
     t.bigint "user_id", null: false
-    t.text "request_details"
-    t.string "status"
+    t.text "request_details", null: false
+    t.string "status", default: "pending", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["rule_id"], name: "index_rule_requests_on_rule_id"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2024_10_11_154135) do
   end
 
   create_table "team_names", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -58,12 +58,13 @@ ActiveRecord::Schema.define(version: 2024_10_11_154135) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "username"
-    t.integer "role"
+    t.string "username", default: "", null: false
+    t.integer "role", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "rule_requests", "rules"

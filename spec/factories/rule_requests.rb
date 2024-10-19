@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :rule_request do
-    rule { nil }
-    user { nil }
-    request_details { "MyText" }
-    status { "MyString" }
+    association :user # Userファクトリと関連付け
+    association :rule # Ruleファクトリと関連付け
+    request_details { "Request for modification" }
+    status { "pending" }
   end
 end

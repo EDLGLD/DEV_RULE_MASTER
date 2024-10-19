@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container d-flex justify-content-between align-items-center">
-    <%= link_to "RULE_MASTER", "/", class: "navbar-brand" %>
+  <div class="container-fluid d-flex justify-content-between align-items-center"> <!-- container を container-fluid に変更 -->
+    <%= link_to "RULE MASTER", "/", class: "navbar-brand mb-0 h1" %>
 
     <div class="d-flex">
       <ul class="navbar-nav">
@@ -28,7 +28,7 @@
                   <%= link_to "修正リクエスト一覧", rule_requests_path, class: "dropdown-item" %>
                 </li>
                 <li>
-                  <%= link_to "新規ルール作成", new_rule_path, class: "dropdown-item" %> <!-- 新規ルール作成へのリンクを追加 -->
+                  <%= link_to "新規ルール作成", new_rule_path, class: "dropdown-item" %>
                 </li>
               <% end %>
               <li>

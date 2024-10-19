@@ -42,10 +42,13 @@
           <%= f.label :password_confirmation %><br />
           <%= f.password_field :password_confirmation, class: "form-control", style: "max-width: 300px;", autocomplete: "new-password" %>
         </div>
-
+        
+        <br>
+        
         <div class="actions">
           <%= f.submit "Sign up", class: "btn btn-primary" %>
         </div>
+
         <%= render "devise/shared/links" %>
         
       <% end %>
