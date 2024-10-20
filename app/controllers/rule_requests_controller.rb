@@ -20,9 +20,9 @@ class RuleRequestsController < ApplicationController
     @rule_request.status = 'pending'
 
     if @rule_request.save
-      User.admins.each do |admin|
-        AdminMailer.rule_request_notification(admin, @rule_request).deliver_later
-      end
+      #User.admins.each do |admin|
+      #  AdminMailer.rule_request_notification(admin, @rule_request).deliver_later
+      #end
       redirect_to rules_path, notice: "修正リクエストが送信されました。"
     else
       @rules = Rule.all # エラーが発生した場合に再度ルールを取得
