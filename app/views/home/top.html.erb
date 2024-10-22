@@ -13,7 +13,7 @@
             <ul class="list-group">
               <% @pending_rule_requests.each do |request| %>
                 <li class="list-group-item">
-                  <%= link_to request.rule.title, rule_path(request.rule) %>（申請者: <%= request.user.username %>）
+                  <%= link_to request.rule.title, rule_requests_path %>（申請者: <%= request.user.username %>）
                 </li>
               <% end %>
             </ul>
