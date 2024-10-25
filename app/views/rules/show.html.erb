@@ -6,14 +6,14 @@
 
 <div class="mb-4 mx-3">
   <strong class="d-block mb-2"><%= t('rules.details') %>:</strong> <!-- タイトルを枠外左上に表示 -->
-  <div class="border rounded p-3"> <!-- 詳細用の角が丸い枠 -->
+  <div class="border rounded p-3">
     <p><%= @rule.details %></p>
   </div>
 </div>
 
 <div class="mb-4 mx-3">
   <strong class="d-block mb-2"><%= t('rules.background') %>:</strong> <!-- タイトルを枠外左上に表示 -->
-  <div class="border rounded p-3"> <!-- 背景用の角が丸い枠 -->
+  <div class="border rounded p-3">
     <p><%= @rule.background %></p>
   </div>
 </div>
@@ -22,8 +22,8 @@
   <% if current_user.admin? || current_user.leader? %>
     <%= link_to t('actions.delete'), @rule, method: :delete, data: { confirm: t('actions.confirm') }, class: 'btn btn-danger' %>
   <% else %>
-    <%= link_to t('rules.form.submit_request'), new_rule_request_path, class: 'btn btn-info' %> <!-- 薄青のボタン -->
+    <%= link_to t('rules.form.submit_request'), new_rule_request_path(rule_id: @rule.id), class: 'btn btn-primary' %> 
   <% end %>
   
-  <%= link_to t('actions.back'), rules_path(team_name_id: @rule.team_name_id), class: 'btn btn-light ms-2' %> <!-- 白ボタン -->
+  <%= link_to t('actions.back'), rules_path(team_name_id: @rule.team_name_id), class: 'btn btn-light ms-2' %> 
 </div>

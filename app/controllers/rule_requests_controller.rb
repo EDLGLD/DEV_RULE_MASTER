@@ -11,7 +11,8 @@ class RuleRequestsController < ApplicationController
   # 修正リクエストの作成
   def new
     @rule_request = RuleRequest.new
-    @rules = Rule.all # すべてのルールを取得してドロップダウンなどに利用
+    @rules = Rule.where(team_name_id: current_user.team_names.pluck(:id)) # 所属チームのルールを取得
+    @selected_rule_id = params[:rule_id] # URLパラメータからルールIDを取得
   end
 
   def create
