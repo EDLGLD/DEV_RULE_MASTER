@@ -7,9 +7,9 @@ class User < ApplicationRecord
   has_many :team_names_users
   has_many :team_names, through: :team_names_users
 
-  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, presence: true, uniqueness: true
   validates :encrypted_password, presence: true
-  validates :username, presence: true, uniqueness: true, length: { minimum: 3, maximum: 20 }
+  validates :username, presence: true, uniqueness: true
   validates :role, presence: true, inclusion: { in: roles.keys }
 
   scope :admins, -> { where(role: :admin) }

@@ -12,6 +12,12 @@
 
   <body>
     <%= render 'shared/header' %>
+
+    <!-- フラッシュメッセージの表示 -->
+    <% flash.each do |key, message| %>
+      <div class="alert alert-<%= key %>"><%= message %></div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
