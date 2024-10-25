@@ -1,0 +1,20 @@
+@import "~bootstrap/scss/bootstrap";
+
+html, body {
+    height: 100%; // Ensure full height
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1; // Make the main area flexible to take up available space
+}
+
+footer {
+    background-color: #f8f9fa; // Optional: adjust color
+    text-align: center;
+    padding: 1rem 0; // Set top and bottom padding
+}
