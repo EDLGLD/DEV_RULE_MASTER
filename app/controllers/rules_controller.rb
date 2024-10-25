@@ -31,17 +31,16 @@ class RulesController < ApplicationController
     # `@rule` を編集
   end
 
-  # POST /rules
   def create
     @rule = Rule.new(rule_params)
-
+  
     respond_to do |format|
       if @rule.save
-        format.html { redirect_to @rule, notice: 'ルールが正常に作成されました。' }
+        format.html { redirect_to @rule, notice: 'Rule was successfully created.' }
         format.json { render :show, status: :created, location: @rule }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @rule.errors, status: :unprocessable_entity }
+        format.json { render json: @rule.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end

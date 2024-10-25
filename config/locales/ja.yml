@@ -10,6 +10,7 @@ ja:
     login: "ログイン"
   rules:
     rules: "ルール一覧"
+    team_name: "チーム名"
     edit_Rule: "ルール編集"
     new_rule: "新規ルール"
     show: "表示"
@@ -27,23 +28,18 @@ ja:
   helpers:
     prompt:
       select: "選択してください"
-  errors:
-    error: "エラー"
-    prohibited_this: "%{model}の保存が禁止されています"
-    translation_missing: "翻訳が見つかりません"  # エラーメッセージを追加
   actions:
     delete: "削除"
     confirm: "本当に削除しますか？"
     back: "戻る"
     create: "作成"
     save: "保存"
-# rails-admin日本語化テンプレ
   activerecord:
     models:
       rule: "ルール"
       user: ユーザー
       team_names_user: "ユーザーが所属するチーム"
-      team_name: "チーム"
+      team_name: "チーム名"
       rule_request: "修正リクエスト"
       post: 投稿
       comment: コメント
@@ -53,6 +49,7 @@ ja:
       rule:
         title: "タイトル"
         team_name: "チーム名"
+        team_name_id: "チーム名"
         details: "詳細"
         background: "背景"
         started_at: "開始日"
@@ -71,11 +68,12 @@ ja:
         email: メールアドレス
         content: お問い合わせ内容
     errors:
+      record_invalid: 'バリデーションに失敗しました: %{errors}'
       messages:
-        record_invalid: 'バリデーションに失敗しました: %{errors}'
-        restrict_dependent_destroy:
-          has_one: "%{record}が存在しているので削除できません"
-          has_many: "%{record}が存在しているので削除できません"
+        required: の入力は必須です  # こちらでも共通のメッセージを参照
+      restrict_dependent_destroy:
+        has_one: "%{record}が存在しているので削除できません"
+        has_many: "%{record}が存在しているので削除できません"
   date:
     abbr_day_names:
     - 日
@@ -176,10 +174,12 @@ ja:
       month: 月
       year: 年
   errors:
-    format: "%{attribute}%{message}"
+    error: "件のエラーが発生しました"
+    prohibited_this: "%{model}の保存に失敗しました"
+    translation_missing: "翻訳が見つかりません" 
     messages:
       accepted: を受諾してください
-      blank: を入力してください
+      blank: に値を入力してください
       confirmation: と%{attribute}の入力が一致しません
       empty: を入力してください
       equal_to: は%{count}にしてください
@@ -197,7 +197,7 @@ ja:
       odd: は奇数にしてください
       other_than: は%{count}以外の値にしてください
       present: は入力しないでください
-      required: を入力してください
+      required: の入力は必須です
       taken: はすでに存在します
       too_long: は%{count}文字以内で入力してください
       too_short: は%{count}文字以上で入力してください
@@ -205,8 +205,8 @@ ja:
     template:
       body: 次の項目を確認してください
       header:
-        one: "%{model}にエラーが発生しました"
-        other: "%{model}に%{count}個のエラーが発生しました"
+        one: "1件のエラーが発生しました"
+        other: "%{count}件のエラーが発生しました"
   helpers:
     select:
       prompt: 選択してください
@@ -347,6 +347,7 @@ ja:
         title: "%{model_label_plural}の一覧"
         menu: "一覧"
         breadcrumb: "%{model_label_plural}"
+        no_records: "レコードがありません"
       show:
         title: "%{model_label} '%{object_label}'の詳細"
         menu: "詳細"
