@@ -9,6 +9,9 @@ ja:
     registration: "ユーザー登録"
     login: "ログイン"
   rules:
+    rules: "ルール一覧"
+    edit_Rule: "ルール編集"
+    new_rule: "新規ルール"
     show: "表示"
     edit: "編集"
     destroy: "削除"
