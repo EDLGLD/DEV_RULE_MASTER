@@ -8,7 +8,9 @@
           <div class="card h-100"> <!-- カードの高さを100%に -->
             <div class="card-body">
               <h2 class="card-title" style="font-family: 'M PLUS 1p', sans-serif; font-size: 2rem; color: #333;"><%= rule.title %></h2>
-              <p class="card-text"><strong>Created at:</strong> <%= rule.created_at.strftime("%Y-%m-%d %H:%M") %></p> <!-- 開始日を表示 -->
+              <p class="card-text">
+                <strong><%= t('rules.started_at') %>:</strong> <%= rule.created_at.strftime("%Y-%m-%d %H:%M") %>
+              </p>
             </div>
             <div class="card-footer">
               <div class="rule-actions">

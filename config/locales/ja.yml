@@ -27,6 +27,7 @@ ja:
   errors:
     error: "エラー"
     prohibited_this: "%{model}の保存が禁止されています"
+    translation_missing: "翻訳が見つかりません"  # エラーメッセージを追加
   actions:
     delete: "削除"
     confirm: "本当に削除しますか？"
@@ -38,6 +39,9 @@ ja:
     models:
       rule: "ルール"
       user: ユーザー
+      team_names_user: "ユーザーが所属するチーム"
+      team_name: "チーム"
+      rule_request: "修正リクエスト"
       post: 投稿
       comment: コメント
       like: いいね
