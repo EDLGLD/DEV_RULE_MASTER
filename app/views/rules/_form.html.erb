@@ -1,52 +1,54 @@
-<%= form_with(model: rule) do |form| %>
-  <% if rule.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(rule.errors.count, "error") %> prohibited this rule from being saved:</h2>
-      <ul>
-        <% rule.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="container mt-4"> <!-- 上部にマージンを追加 -->
+  <%= form_with(model: rule) do |form| %>
+    <% if rule.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h2><%= pluralize(rule.errors.count, t('errors.error')) %> <%= t('errors.prohibited_this', model: t('activerecord.models.rule')) %>:</h2>
+        <ul>
+          <% rule.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group row">
+      <div class="col-md-6">
+        <%= form.label :title, t('activerecord.attributes.rule.title'), class: 'form-label' %>
+        <%= form.text_field :title, class: 'form-control', size: 30 %>
+      </div>
+      <div class="col-md-6">
+        <%= form.label :team_name_id, t('activerecord.attributes.rule.team_name'), class: 'form-label' %>
+        <%= form.collection_select :team_name_id, TeamName.all, :id, :name, { prompt: t('helpers.prompt.select') }, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :details, t('activerecord.attributes.rule.details'), class: 'form-label' %>
+      <%= form.text_area :details, class: 'form-control', rows: 4 %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :background, t('activerecord.attributes.rule.background'), class: 'form-label' %>
+      <%= form.text_area :background, class: 'form-control', rows: 3 %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :started_at, t('activerecord.attributes.rule.started_at'), class: 'form-label' %>
+      <%= form.datetime_select :started_at, class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= form.label :ended_at, t('activerecord.attributes.rule.ended_at'), class: 'form-label' %>
+      <%= form.datetime_select :ended_at, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <% if rule.new_record? %>
+        <%= form.submit t('actions.create'), class: "btn btn-primary" %>
+      <% else %>
+        <%= form.submit t('actions.save'), class: "btn btn-primary" %>
+      <% end %>
+      <%= link_to t('actions.back'), rules_path(team_name_id: @rule.team_name_id), class: "btn btn-light" %>
     </div>
   <% end %>
-
-  <div class="field" style="display: flex; align-items: center;">
-    <div style="margin-right: 10px;">
-      <%= form.label :title %>
-      <%= form.text_field :title, size: 30 %> <!-- サイズを大きく設定 -->
-    </div>
-    <div>
-      <%= form.label :team_name_id, "チーム名" %>
-      <%= form.collection_select :team_name_id, TeamName.all, :id, :name, prompt: "選択してください", class: 'form-control' %>
-    </div>
-  </div>
-
-  <div class="field">
-    <%= form.label :details %>
-    <%= form.text_area :details, size: "40x10" %> <!-- サイズを大きく設定 -->
-  </div>
-
-  <div class="field">
-    <%= form.label :background %>
-    <%= form.text_area :background, size: "40x8" %> <!-- サイズを背景の方が少し小さく設定 -->
-  </div>
-
-  <div class="field">
-    <%= form.label :started_at %>
-    <%= form.datetime_select :started_at, class: 'form-control' %> <!-- クラスを追加してBootstrapスタイルを適用 -->
-  </div>
-  
-  <div class="field">
-    <%= form.label :ended_at %>
-    <%= form.datetime_select :ended_at, class: 'form-control' %> <!-- クラスを追加してBootstrapスタイルを適用 -->
-  </div>
-
-  <div class="actions">
-  <% if rule.new_record? %>
-    <%= form.submit t('actions.create'), class: "btn btn-primary" %> <!-- 新規作成の場合 -->
-  <% else %>
-    <%= form.submit t('actions.save'), class: "btn btn-primary" %> <!-- 編集の場合 -->
-  <% end %>
-  <%= link_to t('actions.back'), rules_path(team_name_id: @rule.team_name_id), class: "btn btn-light" %> <!-- 白いボタン -->
-  </div>
-<% end %>
+</div>

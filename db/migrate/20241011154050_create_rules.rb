@@ -1,6 +1,6 @@
 class CreateRules < ActiveRecord::Migration[6.1]
   def change
-    create_table :rules do |t|
+    create_table :rules, id: :bigint do |t|
       t.string :title
       t.references :team_name, null: false, foreign_key: true
       t.text :details

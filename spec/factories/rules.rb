@@ -1,9 +1,8 @@
 FactoryBot.define do
   factory :rule do
-    title { "MyString" }
-    team_name { nil }
-    details { "MyText" }
-    background { "MyText" }
-    ended_at { "2024-10-12 00:40:51" }
+    title { "Sample Rule" }
+    details { "Details of the rule" }
+    background { "Background of the rule" }
+    association :team_name # TeamNameファクトリを関連付け
   end
 end

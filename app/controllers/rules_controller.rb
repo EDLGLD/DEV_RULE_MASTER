@@ -1,14 +1,15 @@
+# app/controllers/rules_controller.rb
 class RulesController < ApplicationController
   before_action :set_rule, only: %i[show edit update destroy]
   before_action :set_team, only: [:index]
-  before_action :authorize_user!, only: [:new, :create] # 新規作成を許可するユーザーを制限
+  before_action :authorize_user!, only: [:new, :create, :edit, :update, :destroy] # 新規作成を許可するユーザーを制限
 
   # GET /rules
   def index
     if @team # 特定のチームが選択されている場合
-      @rules = Rule.where(team_name_id: @team.id)
+      @rules = Rule.where(team_name_id: @team.id).order(created_at: :desc) # 新しい順にソート
     elsif current_user.team_names.any? # ユーザーが複数のチームに所属している場合
-      @rules = Rule.where(team_name_id: current_user.team_names.pluck(:id))
+      @rules = Rule.where(team_name_id: current_user.team_names.pluck(:id)).order(created_at: :desc) # 新しい順にソート
     else
       @rules = []
       flash.now[:alert] = 'チームに所属していません。'
@@ -33,7 +34,6 @@ class RulesController < ApplicationController
   # POST /rules
   def create
     @rule = Rule.new(rule_params)
-    @rule.team_name_id = current_user.team_names.first.id # 必ずチーム名をセット
 
     respond_to do |format|
       if @rule.save
@@ -63,7 +63,7 @@ class RulesController < ApplicationController
   def destroy
     @rule.destroy
     respond_to do |format|
-      format.html { redirect_to rules_path, status: :see_other, notice: 'ルールが正常に削除されました。' }
+      format.html { redirect_to rules_path(team_name_id: @rule.team_name_id), status: :see_other, notice: 'ルールが正常に削除されました。' }
       format.json { head :no_content }
     end
   end
@@ -77,18 +77,20 @@ class RulesController < ApplicationController
   # `index` アクションでのみチーム情報をセット
   def set_team
     @team = current_user.team_names.find_by(id: params[:team_name_id])
-    
-    if @team.nil? && params[:team_name_id].present?
+
+    if @team.nil?
       redirect_to root_path, alert: '指定されたチームが見つかりませんでした。'
     end
   end
 
   # ユーザーの権限を確認するメソッド
   def authorize_user!
-    unless current_user.admin? || current_user.leader?
-      redirect_to rules_path, alert: 'ルールの新規作成権限がありません。'
+    unless current_user&.admin? || current_user&.leader?
+      redirect_to rules_path(team_name_id: current_user.team_names.first.id), alert: 'ルールの新規作成権限がありません。'
+      return # この行を追加
     end
   end
+  
 
   def rule_params
     params.require(:rule).permit(:title, :details, :background, :created_at, :ended_at, :team_name_id)

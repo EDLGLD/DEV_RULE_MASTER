@@ -1,0 +1,9 @@
+<!-- app/views/admin_mailer/rule_request_notification.html.erb -->
+<p>管理者 <%= @admin.username %> 様,</p>
+
+<p>以下のルール修正リクエストが送信されました:</p>
+
+<p>リクエスト詳細: <%= @rule_request.request_details %></p>
+<p>ルール名: <%= @rule_request.rule.title %></p>
+
+<p>ご確認をお願いいたします。</p>

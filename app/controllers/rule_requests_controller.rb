@@ -18,19 +18,19 @@ class RuleRequestsController < ApplicationController
     @rule_request = RuleRequest.new(rule_request_params)
     @rule_request.user = current_user
     @rule_request.status = 'pending'
-
+  
     if @rule_request.save
       User.admins.each do |admin|
         AdminMailer.rule_request_notification(admin, @rule_request).deliver_later
       end
-      redirect_to rules_path, notice: "修正リクエストが送信されました。"
+      redirect_to rule_path(@rule_request.rule), notice: "修正リクエストが送信されました。" # 修正対象のルールの詳細画面にリダイレクト
     else
       @rules = Rule.all # エラーが発生した場合に再度ルールを取得
       flash.now[:alert] = "修正リクエストの送信に失敗しました。"
       render :new
     end
   end
-
+  
   # 修正リクエストの承認・却下
   def update
     if @rule_request.update(status: params[:status]) # params[:status]から取得

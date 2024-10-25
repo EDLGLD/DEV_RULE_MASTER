@@ -7,11 +7,17 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_pack_tag 'application', media: 'all' %>
-    <%= javascript_pack_tag 'application' %>
+    <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload', as: 'script' %>
   </head>
 
   <body>
     <%= render 'shared/header' %>
+
+    <!-- フラッシュメッセージの表示 -->
+    <% flash.each do |key, message| %>
+      <div class="alert alert-<%= key %>"><%= message %></div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

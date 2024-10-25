@@ -6,10 +6,12 @@ Bundler.require(*Rails.groups)
 
 module DEVRuleMaster
   class Application < Rails::Application
-
     config.load_defaults 6.1
+    config.i18n.available_locales = [:ja, :en]
     config.i18n.default_locale = :ja
+    config.encoding = "utf-8"
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+    config.exceptions_app = self.routes
     config.generators do |g|
       g.helper     false      # helperファイルを自動生成しない
       g.test_framework :rspec,

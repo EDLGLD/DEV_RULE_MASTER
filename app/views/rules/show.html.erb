@@ -1,28 +1,29 @@
-<p id="notice"><%= notice %></p>
+<div class="text-center mb-4">
+  <h1 class="display-4"><%= @rule.title.upcase %></h1> <!-- タイトルを大文字で表示 -->
+</div>
 
-<h1><%= @rule.title %></h1>
+<p class="small text-muted"><%= t('rules.started_at') %>: <%= @rule.created_at.strftime('%Y年%m月%d日') %></p> <!-- 施行日を左端に表示 -->
 
-<p>
-  <strong>Details:</strong>
-  <%= @rule.details %>
-</p>
-<p>
-  <strong>Background:</strong>
-  <%= @rule.background %>
-</p>
-<p>
-  <strong>Created at:</strong>
-  <%= @rule.created_at %>
-</p>
-<p>
-  <strong>Ended at:</strong>
-  <%= @rule.ended_at %>
-</p>
+<div class="mb-4 mx-3">
+  <strong class="d-block mb-2"><%= t('rules.details') %>:</strong> <!-- タイトルを枠外左上に表示 -->
+  <div class="border rounded p-3"> <!-- 詳細用の角が丸い枠 -->
+    <p><%= @rule.details %></p>
+  </div>
+</div>
 
-<% if current_user.admin? || current_user.leader? %>
-  <%= link_to 'Delete', @rule, method: :delete, data: { confirm: 'Are you sure?' } %>
-<% else %>
-  <%= link_to '修正リクエスト', new_rule_request_path, class: 'btn btn-warning' %>
-<% end %>
+<div class="mb-4 mx-3">
+  <strong class="d-block mb-2"><%= t('rules.background') %>:</strong> <!-- タイトルを枠外左上に表示 -->
+  <div class="border rounded p-3"> <!-- 背景用の角が丸い枠 -->
+    <p><%= @rule.background %></p>
+  </div>
+</div>
 
-<%= link_to 'Back', rules_path(team_name_id: @rule.team_name_id) %> <!-- チームIDを指定して戻る -->
+<div class="mb-4">
+  <% if current_user.admin? || current_user.leader? %>
+    <%= link_to t('actions.delete'), @rule, method: :delete, data: { confirm: t('actions.confirm') }, class: 'btn btn-danger' %>
+  <% else %>
+    <%= link_to t('rules.form.submit_request'), new_rule_request_path, class: 'btn btn-info' %> <!-- 薄青のボタン -->
+  <% end %>
+  
+  <%= link_to t('actions.back'), rules_path(team_name_id: @rule.team_name_id), class: 'btn btn-light ms-2' %> <!-- 白ボタン -->
+</div>

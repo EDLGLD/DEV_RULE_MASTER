@@ -1,35 +1,47 @@
-<h1>Home#top</h1>
-<p>Find me in app/views/home/top.html.erb</p>
+<h1 class="mt-4">ようこそ！</h1>
+<p>「Rule Master」は、ルール管理を効率化し、職場全体の透明性を高めるためのアプリケーションです。ルールの共有や修正リクエストの管理が簡単に行えます。</p>
 
-<% if current_user.admin? || current_user.leader? %>
-  <!-- 管理者またはリーダーとしてログインしている場合 -->
-  <h2>お知らせ</h2>
-  <% if @pending_rule_requests.any? %>
-    <p>未処理のルール修正リクエストがあります。</p>
-    <ul>
-      <% @pending_rule_requests.each do |request| %>
-        <li>
-          <%= link_to request.rule.title, rule_path(request.rule) %>（申請者: <%= request.user.username %>）
-        </li>
+<div class="row">
+  <div class="col-md-6">
+    <% if user_signed_in? %> <!-- ログインしているかどうかを確認 -->
+      <% if current_user.admin? || current_user.leader? %>
+        <!-- 管理者またはリーダーとしてログインしている場合 -->
+        <h2 class="mt-4">お知らせ</h2>
+        <div class="alert alert-info">
+          <% if @pending_rule_requests.any? %>
+            <p>未処理のルール修正リクエストがあります。</p>
+            <ul class="list-group">
+              <% @pending_rule_requests.each do |request| %>
+                <li class="list-group-item">
+                  <%= link_to request.rule.title, rule_requests_path %>（申請者: <%= request.user.username %>）
+                </li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p>現在、未処理のルール修正リクエストはありません。</p>
+          <% end %>
+        </div>
+
+      <% elsif current_user.general? %>
+        <!-- 一般ユーザーとしてログインしている場合 -->
+        <h2 class="mt-4">お知らせ</h2>
+        <div class="alert alert-info">
+          <h3>送信したルール修正リクエストのステータス</h3>
+          <% if @user_rule_requests.any? %>
+            <ul class="list-group">
+              <% @user_rule_requests.each do |request| %>
+                <li class="list-group-item">
+                  <%= request.rule.title %>：<%= request.status.humanize %> <!-- ステータス表示 -->
+                </li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p>送信した修正リクエストはありません。</p>
+          <% end %>
+        </div>
       <% end %>
-    </ul>
-  <% else %>
-    <p>現在、未処理のルール修正リクエストはありません。</p>
-  <% end %>
-  
-<% elsif current_user.general? %>
-  <!-- 一般ユーザーとしてログインしている場合 -->
-  <h2>お知らせ</h2>
-  <h3>送信したルール修正リクエストのステータス</h3>
-  <% if @user_rule_requests.any? %>
-    <ul>
-      <% @user_rule_requests.each do |request| %>
-        <li>
-          <%= request.rule.title %>：<%= request.status.humanize %> <!-- ステータス表示 -->
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>送信した修正リクエストはありません。</p>
-  <% end %>
-<% end %>
+    <% else %>
+      <!-- 非ログインの場合は何も表示しない（すでにようこそメッセージが表示されているため） -->
+    <% end %>
+  </div>
+</div>
