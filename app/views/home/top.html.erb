@@ -31,7 +31,7 @@
             <ul class="list-group">
               <% @user_rule_requests.each do |request| %>
                 <li class="list-group-item">
-                  <%= request.rule.title %>：<%= request.status.humanize %> <!-- ステータス表示 -->
+                  <%= request.rule.title %>：<%= I18n.t("activerecord.attributes.rule_request.statuses.#{request.status}") %>
                 </li>
               <% end %>
             </ul>

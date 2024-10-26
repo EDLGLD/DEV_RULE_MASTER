@@ -14,7 +14,7 @@
     <div class="form-group row">
       <div class="col-md-6">
         <%= form.label :title, t('activerecord.attributes.rule.title'), class: 'form-label' %>
-        <%= form.text_field :title, class: 'form-control', size: 30 %>
+        <%= form.text_field :title, class: 'form-control', size: 30 , placeholder: "ルールのタイトルを簡潔に記載してください"%>
       </div>
       <div class="col-md-6">
         <%= form.label :team_name_id, t('activerecord.attributes.rule.team_name'), class: 'form-label' %>
@@ -24,12 +24,12 @@
 
     <div class="form-group">
       <%= form.label :details, t('activerecord.attributes.rule.details'), class: 'form-label' %>
-      <%= form.text_area :details, class: 'form-control', rows: 4 %>
+      <%= form.text_area :details, class: 'form-control', rows: 5 , placeholder: "ルールの詳細を記載してください"%>
     </div>
 
     <div class="form-group">
       <%= form.label :background, t('activerecord.attributes.rule.background'), class: 'form-label' %>
-      <%= form.text_area :background, class: 'form-control', rows: 3 %>
+      <%= form.text_area :background, class: 'form-control', rows: 5 , placeholder: "ルール作成に至った経緯や背景を記載してください"%>
     </div>
 
     <div class="form-group">
@@ -39,7 +39,7 @@
     
     <div class="form-group">
       <%= form.label :ended_at, t('activerecord.attributes.rule.ended_at'), class: 'form-label' %>
-      <%= form.datetime_select :ended_at, class: 'form-control' %>
+      <%= form.datetime_select :ended_at, default: DateTime.now + 1.year,  class: 'form-control' %>
     </div>
 
     <div class="form-group">

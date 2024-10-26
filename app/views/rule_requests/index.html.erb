@@ -17,7 +17,7 @@
           <td><%= link_to request.rule.title, rule_path(request.rule) if request.rule %></td>
           <td><%= request.request_details %></td>
           <td><%= request.user.username if request.user %></td>
-          <td><%= request.status.humanize %></td>
+          <td><%= t("activerecord.attributes.rule_request.statuses.#{request.status}") %></td>
           <td>
             <% if request.status == 'pending' %>
               <div class="d-inline-block mr-2">

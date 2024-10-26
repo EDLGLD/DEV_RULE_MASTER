@@ -54,6 +54,11 @@ ja:
         background: "背景"
         started_at: "開始日"
         ended_at: "終了日"
+      rule_request:
+        statuses:
+          pending: "保留中"
+          rejected: "却下"
+          approved: "承認済み"
       user:
         name: 名前
         email: メールアドレス
