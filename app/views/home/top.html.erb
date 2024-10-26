@@ -26,7 +26,7 @@
         <!-- 一般ユーザーとしてログインしている場合 -->
         <h2 class="mt-4">お知らせ</h2>
         <div class="alert alert-info">
-          <h3>送信したルール修正リクエストのステータス</h3>
+          <p>送信したルール修正リクエストのステータス</p>
           <% if @user_rule_requests.any? %>
             <ul class="list-group">
               <% @user_rule_requests.each do |request| %>
