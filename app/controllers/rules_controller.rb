@@ -39,12 +39,13 @@ class RulesController < ApplicationController
         format.html { redirect_to @rule, notice: 'Rule was successfully created.' }
         format.json { render :show, status: :created, location: @rule }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        flash[:alert] = @rule.errors.full_messages.join(", ")
+        format.html { redirect_to new_rule_path }
         format.json { render json: @rule.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
-
+  
   # PATCH/PUT /rules/1
   def update
     respond_to do |format|
@@ -52,11 +53,12 @@ class RulesController < ApplicationController
         format.html { redirect_to @rule, notice: 'ルールが正常に更新されました。' }
         format.json { render :show, status: :ok, location: @rule }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        flash[:alert] = @rule.errors.full_messages.join(", ")
+        format.html { redirect_to edit_rule_path(@rule) }
         format.json { render json: @rule.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end  
 
   # DELETE /rules/1
   def destroy

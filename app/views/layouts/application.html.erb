@@ -26,9 +26,9 @@
         footer {
             background-color: #f8f9fa; // Optional: adjust color
             text-align: center;
-            padding: 1rem 0; // Set top and bottom padding
-            position: relative; // Changed to relative
-            margin-top: auto; // Push footer to the bottom
+            padding: 1rem 0;
+            position: relative;
+            margin-top: auto; 
         }
     </style>
 </head>
@@ -38,8 +38,12 @@
 
     <!-- フラッシュメッセージの表示 -->
     <% flash.each do |key, message| %>
-        <div class="alert alert-<%= key %>"><%= message %></div>
+      <div class="alert <%= key == "alert" ? "alert-danger" : "alert-success" %> alert-dismissible fade show" role="alert">
+        <%= message %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
     <% end %>
+
 
     <main class="flex-grow-1">
         <%= yield %>

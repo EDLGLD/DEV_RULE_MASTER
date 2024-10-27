@@ -4,17 +4,18 @@ Rails.application.routes.draw do
   resources :rules
   resources :rule_requests, only: [:index, :new, :create, :update]
 
+  # Deviseのコントローラに独自アクションを追加
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
 
-  # 500エラーハンドリング
+  # エラーハンドリング
   match "/500", to: "errors#internal_server_error", via: :all
+  match '*unmatched', to: 'errors#not_found', via: :all
   
   # ルート設定
   root 'home#top'
 
+  # 開発環境でのメール確認
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
-  # 404エラーハンドリングを最初に配置
-  match '*unmatched', to: 'errors#not_found', via: :all
 end

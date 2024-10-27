@@ -14,7 +14,7 @@
     <tbody>
       <% @rule_requests.each do |request| %>
         <tr>
-          <td><%= link_to request.rule.title, rule_path(request.rule) if request.rule %></td>
+          <td><%= link_to request.rule.title, edit_rule_path(request.rule) if request.rule %></td>
           <td><%= request.request_details %></td>
           <td><%= request.user.username if request.user %></td>
           <td><%= t("activerecord.attributes.rule_request.statuses.#{request.status}") %></td>
